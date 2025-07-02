@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+    <style>
+           body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .bmi {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button.reset {
+            background-color: #f44336;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result, .risk, .about {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .risk {
+            font-weight: bold;
+        }
+
+        .about {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>BMI Calculator</h1>
+<div class="bmi">
+    
+   <p>
+    <input class="weight" type="text" placeholder="enter your weight(kg)" required>
+    Weight
+   </p>
+
+ <p>
+    <input class="height" type="text" placeholder="enter your height(m)" required>
+    Height
+   </p>
+   <button class="calculator" onclick="calculator();">Calculate</button>
+   <button class="reset" onclick="reset();">Reset</button>
+   <p class="result"></p>
+   <p class="risk"></p>
+   <p class="about"></p>
+</div>
+
+
+
+
+<script>
+function calculator()
+{ 
+        let h=Number(document.querySelector(".height").value);
+        let w=Number(document.querySelector(".weight").value);
+        let bmi=(w/(h*h));
+        document.querySelector(".result").innerHTML=bmi.toFixed(2);
+
+        if (bmi<18.5){
+             document.querySelector(".risk").innerHTML="🟡Underweight";
+        }
+        else if(bmi>=18.5 && bmi<=24.9){
+             document.querySelector(".risk").innerHTML="🟢Normal weight";
+        }
+        else if(bmi>=25 && bmi<=29.9){
+             document.querySelector(".risk").innerHTML="🟠Overweight";
+        }
+       else if(bmi>=30){
+             document.querySelector(".risk").innerHTML="🔴Obese";
+        }
+
+       document.querySelector(".about").innerHTML =
+  "<strong>BMI Categories:</strong><br><br>" +
+  "Less than 18.5 – 🟡 Underweight<br>" +
+  "18.5 – 24.9 – 🟢 Normal weight<br>" +
+  "25 – 29.9 – 🟠 Overweight<br>" +
+  "30 and above – 🔴 Obese";
+}
+
+function reset(){
+    document.querySelector(".height").value="";
+    document.querySelector(".weight").value="";
+    document.querySelector(".result").innerHTML = "";
+    document.querySelector(".risk").innerHTML = "";
+    document.querySelector(".about").innerHTML = "";
+    
+}
+
+
+</script>
+</body>
+</html>
